@@ -1,0 +1,16 @@
+{
+  "name": "testelectron",
+  "version": "1.0.0",
+  "description": "launch URL fullscreen",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "AJF",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^20.1.1",
+    "electron-packager": "^16.0.0"
+  }
+}
