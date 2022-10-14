@@ -1,0 +1,17 @@
+{
+    "default_url": "http://google.com",
+    "config_set":1,
+    "BrowserWindowCfg": [ {
+        "fullscreen": true,
+        "frame": false,
+        "autoHideMenuBar": true,
+        "alwaysOnTop": true,
+        "darkTheme": true },
+     {
+        "fullscreen": false,
+        "frame": true,
+        "autoHideMenuBar": false,
+        "alwaysOnTop": true,
+        "darkTheme": true
+     }]
+}

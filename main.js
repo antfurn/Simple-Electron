@@ -1,30 +1,47 @@
+'use strict'
 // main.js
 
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const fs = require("fs")
 
 const createWindow = () => {
+  // Read Setting files
+  let settingsData = fs.readFileSync('pmtsBlanking.json');
+  let jSettings = JSON.parse(settingsData);
+  console.log(jSettings);
+  // console.log(jSettings.default_url);
+
+  let browserCfg = jSettings.BrowserWindowCfg[jSettings.config_set]
+  let webPreferences = {
+      preload: path.join(__dirname, 'preload.js')
+    }
+  browserCfg.webPreferences = webPreferences
+  if (!browserCfg.hasOwnProperty('width'))  {
+    browserCfg.width = 800,
+    browserCfg.height = 600
+  }
+
+  console.log(browserCfg);
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    },
-    fullscreen: true,
-    // frame: false,
-    autoHideMenuBar: true,
-    alwaysOnTop: true,
-    darkTheme: true,
-    // kiosk: true,
-    // backgroundColor: '#000'
+    browserCfg
   })
 
+  
+  // frame: jSettings.frame,
+  // autoHideMenuBar: jSettings.autoHideMenuBar,
+  // alwaysOnTop: jSettings.alwaysOnTop,
+  // darkTheme: jSettings.darkTheme,
+
   // and load the index.html of the app.
-  //mainWindow.loadFile('index.html')
-//   mainWindow.loadURL('http://google.com')
-  mainWindow.loadURL('https://www.theracecentre.co.uk/')
+  // mainWindow.loadFile('index.html')
+  // mainWindow.loadURL('http://google.com')
+  // mainWindow.loadURL('https://www.theracecentre.co.uk/')
+
+  mainWindow.loadURL(jSettings.default_url)
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
